@@ -1,0 +1,13 @@
+bin
+obj
+Components/
+packages/
+*/_ReSharper.*/*
+*.user
+*.suo
+*.pidb
+*.userprefs
+*.Designer.cs
+*.designer.cs
+*.DS_Store
+*Thumbs.db
