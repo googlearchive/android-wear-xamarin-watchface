@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="WatchfaceDemo.WatchfaceDemo">
+	<uses-sdk />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <!-- Required to act as a custom watch face. -->
+    <uses-permission android:name="com.google.android.permission.PROVIDE_BACKGROUND" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+	<application android:label="Watchface">
+		<service
+		    android:name="watchfacesample.AnalogWatchFaceService"
+		    android:label="Xamarin Analog Watchface"
+		    android:allowEmbedded="true"
+		    android:taskAffinity=""
+		    android:permission="android.permission.BIND_WALLPAPER" >
+		    <meta-data
+		        android:name="android.service.wallpaper"
+		        android:resource="@xml/watch_face" />
+		    <meta-data
+		        android:name="com.google.android.wearable.watchface.preview"
+		        android:resource="@drawable/preview_analog" />
+		    <intent-filter>
+		        <action android:name="android.service.wallpaper.WallpaperService" />
+		        <category
+		            android:name=
+		            "com.google.android.wearable.watchface.category.WATCH_FACE" />
+		    </intent-filter>
+		</service>
+	</application>
+</manifest>
