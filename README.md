@@ -1,6 +1,5 @@
 Xamarin Android WatchFace Sample
 ===================================
-
 This sample demonstrates how to create watch faces for Android Wear using Xamarin
 and includes a phone app and a wearable app. The wearable app has a variety of
 watch faces including analog, digital, OpenGL, calendar, etc. It also includes
@@ -9,7 +8,6 @@ configuration example.
 
 Pre-requisites
 --------------
-
 - Xamarin 5.7
 - Xamarin.Android Version: 4.20.0.28
 - Android SDK v21
@@ -18,12 +16,10 @@ Pre-requisites
 
 Getting Started
 ---------------
-
 - Download Xamarin Studio 5.7 or higher and open the project solution.
 
 Support
 -------
-
 - Google+ Community: https://plus.sandbox.google.com/communities/113381227473021565406
 - Stack Overflow: http://stackoverflow.com/questions/tagged/android-wear
 
@@ -35,7 +31,6 @@ submitting a pull request through GitHub. Please see CONTRIBUTING.md for more de
 
 License
 -------
-
 Copyright 2015 The Android Open Source Project, Inc.
 
 Licensed to the Apache Software Foundation (ASF) under one or more contributor
