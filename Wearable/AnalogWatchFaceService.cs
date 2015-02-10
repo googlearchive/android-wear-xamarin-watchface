@@ -1,4 +1,19 @@
-﻿using System;
+﻿//
+//  Copyright 2015 Google Inc. All Rights Reserved.
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//        http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+using System;
 using Android.Support.Wearable.Watchface;
 using Android.Views;
 using Android.OS;
@@ -23,7 +38,7 @@ namespace WatchfaceSample
 		* Update rate in milliseconds for interactive mode. We update once a second to advance the
 		* second hand.
 		*/
-		static long InterActiveUpdateRateMs = TimeUnit.Seconds.ToMillis (1);
+		static long InteractiveUpdateRateMs = TimeUnit.Seconds.ToMillis (1);
 
 		public AnalogWatchFaceService ()
 		{
@@ -34,10 +49,8 @@ namespace WatchfaceSample
 			return new Engine (this);
 		}
 
-		// TODO private OK? or will it stop working?
 		private class Engine : CanvasWatchFaceService.Engine
 		{
-
 			CanvasWatchFaceService owner;
 			const int MsgUpdateTime = 0;
 
@@ -46,10 +59,11 @@ namespace WatchfaceSample
 			Paint secondPaint;
 			Paint tickPaint;
 			bool mute;
-			public Time time;
+			Time time;
 
 			Timer timerSeconds;
 			TimeZoneReceiver timeZoneReceiver;
+			bool registeredTimezoneReceiver = false;
 
 			// Whether the display supports fewer bits for each color in ambient mode. When true, we
 			// disable anti-aliasing in ambient mode.
@@ -74,7 +88,6 @@ namespace WatchfaceSample
 				base.OnCreate (holder);
 
 				var backgroundDrawable = owner.Resources.GetDrawable (Resource.Drawable.XamarinWatchFaceBackground);
-				// var backgroundDrawable = Application.Context.Resources.GetDrawable (Resource.Drawable.XamarinWatchFaceBackground);
 				backgroundBitmap = (backgroundDrawable as BitmapDrawable).Bitmap;
 
 				hourPaint = new Paint ();
@@ -101,16 +114,6 @@ namespace WatchfaceSample
 				tickPaint.AntiAlias = true;
 
 				time = new Time ();
-
-				// TODO How to stop the timer? It shouldn't run in ambient mode...
-				timerSeconds = new Timer (new TimerCallback (state => {
-					if (ShouldTimerBeRunning ()) {
-						Invalidate ();
-					}
-				}), null, 
-					TimeSpan.FromMilliseconds (InterActiveUpdateRateMs), 
-					TimeSpan.FromMilliseconds (InterActiveUpdateRateMs));
-
 			}
 
 			public override void OnPropertiesChanged (Bundle properties)
@@ -145,6 +148,8 @@ namespace WatchfaceSample
 					tickPaint.AntiAlias = antiAlias;
 				}
 				Invalidate ();
+
+				UpdateTimer ();
 			}
 
 			public override void OnInterruptionFilterChanged (int interruptionFilter)
@@ -230,9 +235,9 @@ namespace WatchfaceSample
 				} else {
 					UnregisterTimezoneReceiver ();
 				}
-			}
 
-			bool registeredTimezoneReceiver = false;
+				UpdateTimer ();
+			}
 
 			private void RegisterTimezoneReceiver ()
 			{
@@ -259,6 +264,31 @@ namespace WatchfaceSample
 				} else {
 					registeredTimezoneReceiver = false;
 					Application.Context.UnregisterReceiver (timeZoneReceiver);
+				}
+			}
+
+			/**
+			 * Whether the timer should be running depends on whether we're in ambient mode (as well
+			 * as whether we're visible), so we may need to start or stop the timer.
+			 */
+			private void UpdateTimer ()
+			{
+				if (Log.IsLoggable (Tag, LogPriority.Debug)) {
+					Log.Debug (Tag, "update time");
+				}
+
+				if (timerSeconds == null) {
+					timerSeconds = new Timer ((state) => {
+						Invalidate ();
+					}, null, 
+						TimeSpan.FromMilliseconds (InteractiveUpdateRateMs), 
+						TimeSpan.FromMilliseconds (InteractiveUpdateRateMs));
+				} else {
+					if (ShouldTimerBeRunning ()) {
+						timerSeconds.Change (0, InteractiveUpdateRateMs);
+					} else {
+						timerSeconds.Change (Timeout.Infinite, 0);
+					}
 				}
 			}
 

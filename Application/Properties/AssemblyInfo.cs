@@ -5,7 +5,7 @@ using Android.App;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("WatchfaceSample")]
+[assembly: AssemblyTitle ("Application")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("Google Inc.")]
@@ -25,6 +25,3 @@ using Android.App;
 
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
-
-[assembly: Android.App.UsesFeature (Android.Content.PM.PackageManager.FeatureWatch)]
-[assembly: Application (Theme = "@android:style/Theme.DeviceDefault")]

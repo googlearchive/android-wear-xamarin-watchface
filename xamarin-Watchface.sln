@@ -146,5 +146,6 @@ Global
 		$22.NamingStyle = PascalCase
 		$22.IncludeInstanceMembers = True
 		$22.IncludeStaticEntities = True
+		description = Port of the official Android Watch Face sample to Xamarin.
 	EndGlobalSection
 EndGlobal
