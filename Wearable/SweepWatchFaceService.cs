@@ -29,23 +29,17 @@ using Android.Service.Wallpaper;
 
 namespace WatchfaceSample
 {
-	// Sample analog watch face with a ticking second hand. In ambient mode, the second hand isn't shown.
+	// Sample analog watch face with a sweep second hand. In ambient mode, the second hand isn't shown.
 	// On devices with low-bit ambient mode, the hands are drawn without anti-aliasing in ambient mode.
 	// The watch face is drawn with less contrast in mute mode.
 	// 
-	// SweepWatchFaceService is similar but has a sweep second hand.
-	[Service (Label = "AnalogWatchFaceService")]
-	public class AnalogWatchFaceService : CanvasWatchFaceService
+	// AnalogWatchFaceService is similar but has a ticking second hand.
+	[Service (Label = "SweepWatchFaceService")]
+	public class SweepWatchFaceService : CanvasWatchFaceService
 	{
-		const string Tag = "AnalogWatchFaceService";
+		const string Tag = "SweepWatchFaceService";
 
-		/**
-		* Update rate in milliseconds for interactive mode. We update once a second to advance the
-		* second hand.
-		*/
-		static long InteractiveUpdateRateMs = TimeUnit.Seconds.ToMillis (1);
-
-		public AnalogWatchFaceService ()
+		public SweepWatchFaceService ()
 		{
 		}
 
@@ -153,8 +147,6 @@ namespace WatchfaceSample
 					tickPaint.AntiAlias = antiAlias;
 				}
 				Invalidate ();
-
-				UpdateTimer ();
 			}
 
 			public override void OnInterruptionFilterChanged (int interruptionFilter)
@@ -173,7 +165,13 @@ namespace WatchfaceSample
 
 			public override void OnDraw (Canvas canvas, Rect bounds)
 			{
-				time.SetToNow ();
+				if (Log.IsLoggable (Tag, LogPriority.Debug)) {
+					Log.Debug (Tag, "onDraw");
+				}
+				long now = Java.Lang.JavaSystem.CurrentTimeMillis ();
+				time.Set (now);
+				int milliseconds = (int)(now % 1000);
+
 				int width = bounds.Width ();
 				int height = bounds.Height ();
 
@@ -203,7 +201,8 @@ namespace WatchfaceSample
 						centerX + outerX, centerY + outerY, tickPaint);
 				}
 
-				float secRot = time.Second / 30f * (float)Math.PI;
+				float seconds = time.Second + milliseconds / 1000f;
+				float secRot = seconds / 30f * (float)Math.PI;
 				int minutes = time.Minute;
 				float minRot = minutes / 30f * (float)Math.PI;
 				float hrRot = ((time.Hour + (minutes / 60f)) / 6f) * (float)Math.PI;
@@ -225,6 +224,10 @@ namespace WatchfaceSample
 				float hrX = (float)Math.Sin (hrRot) * hrLength;
 				float hrY = (float)-Math.Cos (hrRot) * hrLength;
 				canvas.DrawLine (centerX, centerY, centerX + hrX, centerY + hrY, hourPaint);
+
+				if (IsVisible && !IsInAmbientMode) {
+					Invalidate ();
+				}
 			}
 
 			public override void OnVisibilityChanged (bool visible)
@@ -237,11 +240,10 @@ namespace WatchfaceSample
 					RegisterTimezoneReceiver ();
 					time.Clear (Java.Util.TimeZone.Default.ID);
 					time.SetToNow ();
+					Invalidate ();
 				} else {
 					UnregisterTimezoneReceiver ();
 				}
-
-				UpdateTimer ();
 			}
 
 			private void RegisterTimezoneReceiver ()
@@ -270,36 +272,6 @@ namespace WatchfaceSample
 					registeredTimezoneReceiver = false;
 					Application.Context.UnregisterReceiver (timeZoneReceiver);
 				}
-			}
-
-			/**
-			 * Whether the timer should be running depends on whether we're in ambient mode (as well
-			 * as whether we're visible), so we may need to start or stop the timer.
-			 */
-			private void UpdateTimer ()
-			{
-				if (Log.IsLoggable (Tag, LogPriority.Debug)) {
-					Log.Debug (Tag, "update time");
-				}
-
-				if (timerSeconds == null) {
-					timerSeconds = new Timer ((state) => {
-						Invalidate ();
-					}, null, 
-						TimeSpan.FromMilliseconds (InteractiveUpdateRateMs), 
-						TimeSpan.FromMilliseconds (InteractiveUpdateRateMs));
-				} else {
-					if (ShouldTimerBeRunning ()) {
-						timerSeconds.Change (0, InteractiveUpdateRateMs);
-					} else {
-						timerSeconds.Change (Timeout.Infinite, 0);
-					}
-				}
-			}
-
-			private bool ShouldTimerBeRunning ()
-			{
-				return IsVisible && !IsInAmbientMode;
 			}
 
 		}
