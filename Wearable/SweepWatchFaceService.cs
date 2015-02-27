@@ -27,7 +27,7 @@ using System.Threading;
 using Android.Content;
 using Android.Service.Wallpaper;
 
-namespace WatchfaceSample
+namespace Google.XamarinSamples.WatchFace
 {
 	// Sample analog watch face with a sweep second hand. In ambient mode, the second hand isn't shown.
 	// On devices with low-bit ambient mode, the hands are drawn without anti-aliasing in ambient mode.
@@ -45,10 +45,10 @@ namespace WatchfaceSample
 
 		public override WallpaperService.Engine OnCreateEngine ()
 		{
-			return new Engine (this);
+			return new SweepWatchFaceEngine (this);
 		}
 
-		private class Engine : CanvasWatchFaceService.Engine
+		private class SweepWatchFaceEngine : CanvasWatchFaceService.Engine
 		{
 			CanvasWatchFaceService owner;
 			const int MsgUpdateTime = 0;
@@ -60,7 +60,6 @@ namespace WatchfaceSample
 			bool mute;
 			Time time;
 
-			Timer timerSeconds;
 			TimeZoneReceiver timeZoneReceiver;
 			bool registeredTimezoneReceiver = false;
 
@@ -71,7 +70,7 @@ namespace WatchfaceSample
 			Bitmap backgroundBitmap;
 			Bitmap backgroundScaledBitmap;
 
-			public Engine (CanvasWatchFaceService owner) : base (owner)
+			public SweepWatchFaceEngine (CanvasWatchFaceService owner) : base (owner)
 			{
 				this.owner = owner;
 			}

@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!---Copyright 2015 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
 <resources>
+	<string name="AnalogConfigText">This is the config activity for the Analog and Card Bounds watch faces</string>
+	<string name="DigitalConfigText">Digital watch face configuration</string>
+	<string name="TiltConfigText">Tilt watch face configuration</string>
+	<string name="DigitalConfigBackground">Background</string>
+	<string name="DigitalConfigHours">Hours</string>
+	<string name="DigitalConfigMinutes">Minutes</string>
+	<string name="DigitalConfigSeconds">Seconds</string>
 
-    <string name="app_name">Watch Face Samples</string>
+	<string name="TitleNoDeviceConnected">No wearable device is currently connected.</string>
+	<string name="OkNoDevice_connected">OK</string>
 
+	<string name="ColorBlack">Black</string>
+	<string name="ColorBlue">Blue</string>
+	<string name="ColorGray">Gray</string>
+	<string name="ColorGreen">Green</string>
+	<string name="ColorNavy">Navy</string>
+	<string name="ColorRed">Red</string>
+	<string name="ColorWhite">White</string>
+
+	<string-array name="ColorArray">
+		<item>@string/ColorBlack</item>
+		<item>@string/ColorBlue</item>
+		<item>@string/ColorGray</item>
+		<item>@string/ColorGreen</item>
+		<item>@string/ColorNavy</item>
+		<item>@string/ColorRed</item>
+		<item>@string/ColorWhite</item>
+	</string-array>
 </resources>

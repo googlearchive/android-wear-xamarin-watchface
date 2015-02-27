@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!---Copyright 2015 Google Inc. All Rights Reserved.
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,4 +13,11 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<wallpaper xmlns:android="http://schemas.android.com/apk/res/android" />
+<resources>
+    <color name="DigitalAmPm">#aaaaa0</color>
+    <color name="DigitalColons">#aaaaa0</color>
+    <color name="ConfigActivityBackground">#ffffff</color>
+    <color name="ConfigActivityHeaderTextColor">#959595</color>
+    <color name="ColorItemLabelColor">#000000</color>
+    <color name="ColorItemCircleBorderColor">#424242</color>
+</resources>

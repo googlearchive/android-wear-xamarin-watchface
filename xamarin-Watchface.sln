@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{074C7F3C-8417-4243-A0EB-6E4A402FFA36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchFace Companion Application", "Application\WatchFace Companion Application.csproj", "{074C7F3C-8417-4243-A0EB-6E4A402FFA36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wearable", "Wearable\Wearable.csproj", "{A946B582-2FBE-4A70-82B5-38772DA65865}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchFace Wearable Application", "Wearable\WatchFace Wearable Application.csproj", "{A946B582-2FBE-4A70-82B5-38772DA65865}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +146,9 @@ Global
 		$22.NamingStyle = PascalCase
 		$22.IncludeInstanceMembers = True
 		$22.IncludeStaticEntities = True
+		$0.DotNetNamingPolicy = $24
+		$24.DirectoryNamespaceAssociation = None
+		$24.ResourceNamePolicy = FileFormatDefault
 		description = Port of the official Android Watch Face sample to Xamarin.
 	EndGlobalSection
 EndGlobal

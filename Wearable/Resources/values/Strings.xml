@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!---Copyright 2015 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
 <resources>
-	<string name="hello_rect">I\'m Rect. Tap Me!</string>
-	<string name="hello_round">I\'m Round. Tap Me!</string>
-	<string name="app_name">WatchfaceDemo</string>
-</resources>
-    
+	<string name="AppName">WatchFace</string>
+	<string name="DigitalBackgroundColor">Background color</string>
+	<string name="DigitalConfigName">Digital watch face configuration</string>
+	<string name="ColorBlack">Black</string>
+	<string name="ColorBlue">Blue</string>
+	<string name="ColorGray">Gray</string>
+	<string name="ColorGreen">Green</string>
+	<string name="ColorNavy">Navy</string>
+	<string name="ColorRed">Red</string>
+	<string name="ColorWhite">White</string>
+
+	<string-array name="ColorArray">
+		<item>@string/ColorBlack</item>
+		<item>@string/ColorBlue</item>
+		<item>@string/ColorGray</item>
+		<item>@string/ColorGreen</item>
+		<item>@string/ColorNavy</item>
+		<item>@string/ColorRed</item>
+		<item>@string/ColorWhite</item>
+	</string-array>
+</resources>    

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!---Copyright 2015 Google Inc. All Rights Reserved.
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,4 +13,14 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<wallpaper xmlns:android="http://schemas.android.com/apk/res/android" />
+<resources>
+    <dimen name="DigitalTextSize">40dp</dimen>
+    <dimen name="DigitalTextSizeRound">45dp</dimen>
+    <dimen name="DigitalAmPmSize">25dp</dimen>
+    <dimen name="DigitalAmPmSizeRound">30dp</dimen>
+    <dimen name="DigitalXOffset">15dp</dimen>
+    <dimen name="DigitalXOffsetRound">25dp</dimen>
+    <dimen name="DigitalYOffset">90dp</dimen>
+    <dimen name="DigitalConfigColorPickerItemMargin">32dp</dimen>
+    <dimen name="ContentPaddingStart">12dp</dimen>
+</resources>

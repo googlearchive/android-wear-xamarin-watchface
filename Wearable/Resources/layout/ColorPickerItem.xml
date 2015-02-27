@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.wearable.view.CircledImageView
+        android:id="@+id/Color"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center_vertical"
+        app:circle_border_color="@color/ColorItemCircleBorderColor"
+        app:circle_radius="26dp"
+        app:circle_border_width="1dp" />
+    <TextView
+        android:id="@+id/Label"
+        android:fontFamily="sans-serif-condensed-light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/ColorItemLabelColor"
+        android:textSize="18sp" />
+</merge>

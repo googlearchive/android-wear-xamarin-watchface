@@ -27,7 +27,7 @@ using System.Threading;
 using Android.Content;
 using Android.Service.Wallpaper;
 
-namespace WatchfaceSample
+namespace Google.XamarinSamples.WatchFace
 {
 	// Sample analog watch face with a ticking second hand. In ambient mode, the second hand isn't shown.
 	// On devices with low-bit ambient mode, the hands are drawn without anti-aliasing in ambient mode.
@@ -45,19 +45,16 @@ namespace WatchfaceSample
 		*/
 		static long InteractiveUpdateRateMs = TimeUnit.Seconds.ToMillis (1);
 
-		public AnalogWatchFaceService ()
-		{
-		}
-
 		public override WallpaperService.Engine OnCreateEngine ()
 		{
-			return new Engine (this);
+			return new AnalogWatchFaceEngine (this);
 		}
 
-		private class Engine : CanvasWatchFaceService.Engine
+		private class AnalogWatchFaceEngine : CanvasWatchFaceService.Engine
 		{
-			CanvasWatchFaceService owner;
 			const int MsgUpdateTime = 0;
+
+			CanvasWatchFaceService owner;
 
 			Paint hourPaint;
 			Paint minutePaint;
@@ -77,12 +74,12 @@ namespace WatchfaceSample
 			Bitmap backgroundBitmap;
 			Bitmap backgroundScaledBitmap;
 
-			public Engine (CanvasWatchFaceService owner) : base (owner)
+			public AnalogWatchFaceEngine (CanvasWatchFaceService owner) : base (owner)
 			{
 				this.owner = owner;
 			}
 
-			public override void OnCreate (ISurfaceHolder holder)
+			public override void OnCreate (ISurfaceHolder surfaceHolder)
 			{
 				this.SetWatchFaceStyle (new WatchFaceStyle.Builder (this.owner)
 					.SetCardPeekMode (WatchFaceStyle.PeekModeShort)
@@ -90,7 +87,7 @@ namespace WatchfaceSample
 					.SetShowSystemUiTime (false)
 					.Build ()
 				);
-				base.OnCreate (holder);
+				base.OnCreate (surfaceHolder);
 
 				var backgroundDrawable = owner.Resources.GetDrawable (Resource.Drawable.XamarinWatchFaceBackground);
 				backgroundBitmap = (backgroundDrawable as BitmapDrawable).Bitmap;
