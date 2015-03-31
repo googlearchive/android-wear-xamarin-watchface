@@ -28,3 +28,8 @@ using Android.App;
 
 [assembly: Android.App.UsesFeature (Android.Content.PM.PackageManager.FeatureWatch)]
 [assembly: Application (Theme = "@android:style/Theme.DeviceDefault")]
+
+[assembly: UsesFeature ("android.hardware.type.watch")]
+[assembly: UsesPermission ("com.google.android.permission.PROVIDE_BACKGROUND")]
+[assembly: UsesPermission (Android.Manifest.Permission.WakeLock)]
+[assembly: MetaData ("com.google.android.gms.version", Value="@integer/google_play_services_version")]
