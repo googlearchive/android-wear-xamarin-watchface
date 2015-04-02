@@ -34,7 +34,10 @@ namespace Google.XamarinSamples.WatchFace
 	// The watch face is drawn with less contrast in mute mode.
 	// 
 	// SweepWatchFaceService is similar but has a sweep second hand.
-	[Service (Label = "AnalogWatchFaceService")]
+	[Service (Label="Xamarin Analog Watchface", Permission="android.permission.BIND_WALLPAPER")]
+	[MetaData ("android.service.wallpaper", Resource="@xml/watch_face")]
+	[MetaData ("com.google.android.wearable.watchface.preview", Resource="@drawable/preview_analog")]
+	[IntentFilter (new [] { "android.service.wallpaper.WallpaperService" }, Categories=new [] { "com.google.android.wearable.watchface.category.WATCH_FACE" })]
 	public class AnalogWatchFaceService : CanvasWatchFaceService
 	{
 		const string Tag = "AnalogWatchFaceService";

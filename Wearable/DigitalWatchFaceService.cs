@@ -39,7 +39,17 @@ namespace Google.XamarinSamples.WatchFace
 	// mode, the text is drawn without anti-aliasing in ambient mode. On devices which require burn-in
 	// protection, the hours are drawn in normal rather than bold. The time is drawn with less contrast
 	// and without seconds in mute mode.
-	[Service (Label = "DigitalWatchFaceService")]
+	[Service (Label = "Xamarin Digital Watchface", Permission="android.permission.BIND_WALLPAPER")]
+	[MetaData ("android.service.wallpaper", Resource="@xml/watch_face")]
+	[MetaData ("com.google.android.wearable.watchface.preview", 
+		Resource="@drawable/preview_digital")]
+	[MetaData ("com.google.android.wearable.watchface.preview_circular", 
+		Resource="@drawable/preview_digital_circular")]
+	[MetaData ("com.google.android.wearable.watchface.companionConfigurationAction",
+		Value="google.xamarinsamples.watchface.CONFIG_DIGITAL")]
+	[MetaData ("com.google.android.wearable.watchface.wearableConfigurationAction",
+		Value="google.xamarinsamples.watchface.CONFIG_DIGITAL")]
+	[IntentFilter (new [] { "android.service.wallpaper.WallpaperService" }, Categories=new [] { "com.google.android.wearable.watchface.category.WATCH_FACE" })]
 	public class DigitalWatchFaceService: CanvasWatchFaceService
 	{
 		const string Tag = "DigitalWatchFaceService";
